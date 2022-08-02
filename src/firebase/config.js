@@ -7,12 +7,12 @@ import { getFirestore } from "firebase/firestore/lite";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCmFta5KBXjHEV8_AQGnaevhQBQNuBEx0c",
-  authDomain: "react-practice-d61b2.firebaseapp.com",
-  projectId: "react-practice-d61b2",
-  storageBucket: "react-practice-d61b2.appspot.com",
-  messagingSenderId: "846109872209",
-  appId: "1:846109872209:web:9bc195fcc3d250f681e870"
+  apiKey: "AIzaSyAJTYWwVYTrC9PIcS4AcBWna0TnY6GcIeU",
+  authDomain: "petsos-af912.firebaseapp.com",
+  projectId: "petsos-af912",
+  storageBucket: "petsos-af912.appspot.com",
+  messagingSenderId: "789671171466",
+  appId: "1:789671171466:web:3e4a83b08771eea769e473"
 };
 
 // Initialize Firebase
