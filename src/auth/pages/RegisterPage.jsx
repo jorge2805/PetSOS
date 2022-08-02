@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 
 const DefaultData = {
-  displayName: 'Jorge',
+  displayName: 'prueba',
   email: 'prueba@gmail.com',
   password: '123456'
 }

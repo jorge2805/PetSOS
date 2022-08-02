@@ -18,7 +18,7 @@ export const startNewNote = () => {
 
         dispatch(savingNote());
 
-        const newDoc = doc( collection( FirebaseFirestoreLite, `${uid}/journal/notes`) );
+        const newDoc = doc( collection( FirebaseFirestoreLite, `${uid}/mascotas/reportes/`) );
         await setDoc(newDoc, newNote);
         
         newNote.id = newDoc.id;
@@ -49,7 +49,7 @@ export const startSavingNote = () => {
         const newNote = {...note};
         delete newNote.id;        
         
-        const noteToUpdateRef = doc( FirebaseFirestoreLite, `${uid}/journal/notes/${note.id}`);
+        const noteToUpdateRef = doc( FirebaseFirestoreLite, `${uid}/mascotas/reportes/${note.id}`);
         await setDoc(noteToUpdateRef, newNote, {merge: true});       
 
         dispatch(updateNote(note));
@@ -78,7 +78,7 @@ export const startDeletingNote = () => {
         const {uid} = getState().auth;
         const {active: note} = getState().journal;
 
-        const noteRef = doc( FirebaseFirestoreLite, `${uid}/journal/notes/${note.id}`);
+        const noteRef = doc( FirebaseFirestoreLite, `${uid}/mascotas/reportes/${note.id}`);
         await deleteDoc( noteRef);
 
         dispatch( deleteNoteById(note.id) );

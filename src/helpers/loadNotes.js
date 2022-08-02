@@ -5,7 +5,7 @@ import { FirebaseFirestoreLite } from "../firebase/config";
 export const loadNotes = async (uid = '') => {
     if ( !uid ) throw new Error('El UID del usuario no existe');
 
-    const collectionRef = collection(FirebaseFirestoreLite, `${ uid }/journal/notes`);
+    const collectionRef = collection(FirebaseFirestoreLite, `${ uid }/mascotas/reportes`);
     const docs = await getDocs(collectionRef);
 
     const notes = [];

@@ -4,7 +4,7 @@ export const fileUpload = async (file) => {
     const cloudUrl = 'https://api.cloudinary.com/v1_1/jorgeimgcloud/upload';
 
     const formData = new FormData();
-    formData.append('upload_preset','react-new-journal');
+    formData.append('upload_preset','nuevo-reporte');
     formData.append('file',file);
 
     try {
