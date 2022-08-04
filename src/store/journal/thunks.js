@@ -9,9 +9,20 @@ export const startNewNote = () => {
         
         const { uid } = getState().auth;
 
+        //Status 1: Pendiente de Cambios
+        //Status 2: Pendiente de aprobacion
+        //Status 3: Rechazada
+        //Status 4: Aprobada
+        //Status 5: Resuelta
+        //Status 6: Expirada
+
+
         const newNote = {
             title: '',
             body: '',
+            lat: '',
+            long: '',
+            status: 1,
             date: new Date().getTime(),
             imageUrls: []
         }
@@ -47,8 +58,8 @@ export const startSavingNote = () => {
         const { active:note } = getState().journal;
 
         const newNote = {...note};
-        delete newNote.id;        
-        
+        delete newNote.id;         
+            
         const noteToUpdateRef = doc( FirebaseFirestoreLite, `${uid}/mascotas/reportes/${note.id}`);
         await setDoc(noteToUpdateRef, newNote, {merge: true});       
 
