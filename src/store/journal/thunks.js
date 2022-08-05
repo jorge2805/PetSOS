@@ -20,8 +20,8 @@ export const startNewNote = () => {
         const newNote = {
             title: '',
             body: '',
-            lat: '',
-            long: '',
+            lat: 0,
+            long: 0,
             status: 1,
             date: new Date().getTime(),
             imageUrls: []
@@ -56,10 +56,45 @@ export const startSavingNote = () => {
 
         const { uid } = getState().auth;
         const { active:note } = getState().journal;
+        
+        let latitude;
+        let longitude;
 
-        const newNote = {...note};
-        delete newNote.id;         
-            
+        // Creating a promise out of the function
+        let getLocationPromise = new Promise((resolve, reject) => {
+            let lat = 0
+            let long = 0
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+
+                    // console.log(position.coords.latitude, position.coords.longitude) //test...
+
+                    lat = position.coords.latitude
+                    long = position.coords.longitude
+
+                    // console.log("LATLONG1: ", lat, long) //test...
+
+                    // Resolving the values which I need
+                    resolve({latitude: lat, 
+                            longitude: long})
+                })
+
+            } else {
+                reject("your browser doesn't support geolocation API")
+            }
+        })
+
+        // Now I can use the promise followed by .then() 
+        // to make use of the values anywhere in the program
+        await getLocationPromise.then((location) => {
+            latitude = location.latitude;
+            longitude = location.longitude;
+        }).catch((err) => {
+            console.log(err)
+        })
+
+        const newNote = {...note, lat: latitude, long: longitude };
+        delete newNote.id; 
         const noteToUpdateRef = doc( FirebaseFirestoreLite, `${uid}/mascotas/reportes/${note.id}`);
         await setDoc(noteToUpdateRef, newNote, {merge: true});       
 
