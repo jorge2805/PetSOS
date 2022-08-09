@@ -35,8 +35,8 @@ export const LoginPage = () => {
   const isAuth = useMemo( () => {return status === 'checking'},[status]);
 
   return (
-    <AuthLayout title="PetSOS - Iniciar Sesión">
-      <form onSubmit={onSubmit  }>
+    <AuthLayout title="Iniciar Sesión" >
+      <form onSubmit={onSubmit}>
         <Grid container>
           <Grid item xs={12} sx={{mt: 2}}>
             <TextField

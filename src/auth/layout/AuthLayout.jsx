@@ -8,7 +8,11 @@ export const AuthLayout = ({children, title = ''}) => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      sx={{ minHeight: '100vh', backgroundColor: 'primary.main', padding: 4}}
+      sx={{ 
+        minHeight: '100vh', 
+        backgroundColor: 'primary.main', 
+        padding: 4
+      }}
     >
         <Grid
             item
@@ -21,6 +25,14 @@ export const AuthLayout = ({children, title = ''}) => {
                 borderRadius: 2
             }}
         >
+            <Grid 
+              container 
+              justifyContent="center"
+              sx={{
+                marginBottom: 3, 
+              }}>
+                <img src='../src/images/LogoPetSOS.png' alt="Logo PetSOS" width='350em'></img>
+            </Grid>
             <Typography variant="h5" sx={{mb: 1}}>{title}</Typography>
 
             {children}

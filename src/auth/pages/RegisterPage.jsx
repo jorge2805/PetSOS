@@ -46,7 +46,7 @@ export const RegisterPage = () => {
   }
 
   return (
-    <AuthLayout title="PetSOS - Registrate">
+    <AuthLayout title="Registrate">
       <form onSubmit={ onSubmit }>
         <Grid container>
           <Grid item xs={12} sx={{mt: 2}}>
