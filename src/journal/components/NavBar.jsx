@@ -10,19 +10,6 @@ export const NavBar = ({drawerWidth = 240}) => {
     const onClickLogout = () => {
         dispatch(startLogout()); 
     }
-
-    const onClickAuthIcon = () => {
-        console.log('onClickAuthIcon')
-    }
-
-    const onClickDashboard = () => {
-        console.log('onClickDashboard')
-    }
-
-    const onClickReportList = () => {
-        console.log('onClickReportList')
-    }
-
   
 return (
     <AppBar 
@@ -65,7 +52,6 @@ return (
                         </Typography> 
                     </Link>
                     <Button 
-                        onClick={onClickDashboard}
                         sx={{
                             color:'white'
                         }}
@@ -82,7 +68,6 @@ return (
                         </Link>
                     </Button>
                     <Button 
-                        onClick={onClickReportList}
                         sx={{
                             color:'white'
                         }}
@@ -104,7 +89,6 @@ return (
                     justifyContent='flex-end'
                     >
                     <IconButton 
-                        onClick={onClickAuthIcon}
                         sx={{
                             color:'white'
                         }}
