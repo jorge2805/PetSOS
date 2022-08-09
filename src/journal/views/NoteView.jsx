@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Moment from 'moment';
 
 import { useForm } from "../../hooks";
 import { ImageGallery } from "../components";
@@ -26,7 +27,9 @@ export const NoteView = () => {
     const {id, title, body, date, imageUrls, onInputChange, formState} = useForm(activeNote);
 
     const dateString = useMemo(() => {
-        return new Date(date).toUTCString();
+        
+        return Moment(date).format('ll');
+        // return Moment(date).format('DD-MM-YYYY');
     }, [date])
 
     useEffect(() => {
@@ -56,64 +59,102 @@ export const NoteView = () => {
         <Grid 
             container
             direction='row'
-            justifyContent='space-between'
             alignItems='center'
             sx={{mb: 1}}
         >
-            <Grid item>
-                <Typography fontSize={39} fontWeight='light'>{dateString}</Typography>
-            </Grid>
-            <Grid item>
-                <input
-                    type='file'
-                    multiple
-                    ref={fileInputRef}
-                    onChange={onFileInputChange}
-                    style={{display: 'none'}}
-                /> 
-                <IconButton
-                    color="primary"
-                    disabled={ isSaving }
-                    onClick = { () => fileInputRef.current.click()}
+            {/* Header */}
+            <Grid container item
+                sm={12} md={12}                
+            >
+                <Grid
+                    container 
+                    item
+                    sm={6} md={6}                
+                    justifyContent='flex-start'
                 >
-                    <AddAPhoto/>
-                </IconButton>
-                <Button
-                    disabled={isSaving}
-                    onClick={ saveNote } 
-                    color="primary" 
-                    sx={{ padding: 2}}                 >
-                    <SaveOutlined sx={{fontSize: 30, mr: 1}}/>
-                    Save
-                </Button>
-            </Grid>
-            <Grid container>
-                <TextField
-                    type="text"
-                    variant="filled"
-                    fullWidth
-                    placeholder="Insert Tittle"
-                    label="Nombre"
-                    sx={{ border: 'none', mb: 1}}
-                    name="title"
-                    value={ title }
-                    onChange={onInputChange}
-                />
-                <TextField
-                    type="text"
-                    variant="filled"
-                    fullWidth
-                    multiline
-                    placeholder="Describe mejor a tu mascota"
-                    minRows={5}
-                    sx={{ border: 'none', mb: 1}}
-                    name="body"
-                    value={ body  }
-                    onChange={onInputChange}
-                />
+                    <Typography fontSize={39} fontWeight='light'>{dateString}</Typography>
+                </Grid>
+                <Grid 
+                    container
+                    item
+                    sm={12} md={6}                
+                    justifyContent='flex-end'
+                >
+                    <input
+                        type='file'
+                        multiple
+                        ref={fileInputRef}
+                        onChange={onFileInputChange}
+                        style={{display: 'none'}}
+                    /> 
+                    <IconButton
+                        color="primary"
+                        disabled={ isSaving }
+                        onClick = { () => fileInputRef.current.click()}
+                    >
+                        <AddAPhoto/>
+                    </IconButton>
+                    <Button
+                        disabled={isSaving}
+                        onClick={ saveNote } 
+                        color="primary" 
+                        sx={{ padding: 2}}                 >
+                        <SaveOutlined sx={{fontSize: 30, mr: 1}}/>
+                        Save
+                    </Button>
+                </Grid>
             </Grid>
 
-            <Grid container justifyContent='end'>
+            <Grid container item
+                alignContent='flex-start'
+                sm={12} md={12}                
+            >
+                <Grid 
+                    container
+                    item
+                    sm={12} md={6} 
+                    alignContent='flex-start'   
+                    sx={{
+                        pr:1
+                    }}            
+                >
+                    <TextField
+                        type="text"
+                        variant="filled"
+                        fullWidth
+                        placeholder="Insert Tittle"
+                        label="Nombre"
+                        sx={{ border: 'none', mb: 1}}
+                        name="title"
+                        value={ title }
+                        onChange={onInputChange}
+                    />
+                    <TextField
+                        type="text"
+                        variant="filled"
+                        fullWidth
+                        multiline
+                        placeholder="Describe mejor a tu mascota"
+                        minRows={5}
+                        sx={{ border: 'none', mb: 1}}
+                        name="body"
+                        value={ body  }
+                        onChange={onInputChange}
+                    />
+                </Grid>
+                <Grid 
+                    container
+                    item
+                    sm={12} md={6}              
+                >
+                    <ImageGallery 
+                        sm={6} md={6}                
+                        images = {activeNote.imageUrls}
+                    />
+                </Grid>
+            </Grid>
+
+            <Grid container justifyContent='flex-end'>
                 <Button
                     onClick={onDeleteNote}
                     sx={{mt:2}}
@@ -123,7 +164,6 @@ export const NoteView = () => {
                     Delete
                 </Button>
             </Grid>
-            <ImageGallery images = {activeNote.imageUrls}/>
         </Grid>
     )
 }

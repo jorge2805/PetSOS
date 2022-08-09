@@ -7,7 +7,7 @@ import { IconButton } from "@mui/material"
 
 import { UserLayout } from "../layout/UserLayout"
 import { NoteView } from "../views/NoteView"
-import { NothingSelectedView } from "../views/NothingSelectedView"
+import { ProfileView } from "../views/ProfileView"
 
 export const ProfilePage = () => {
   
@@ -17,7 +17,7 @@ export const ProfilePage = () => {
   return (
     <UserLayout>
 
-      <h1>Profile Page</h1>
+      {(!!active) ? <NoteView/> : <ProfileView/> }      
 
     </UserLayout>
   )
