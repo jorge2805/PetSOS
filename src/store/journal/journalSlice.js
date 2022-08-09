@@ -27,6 +27,9 @@ export const journalSlice = createSlice({
             state.active = action.payload;
             state.messageSaved = '';
         },
+        setActiveNull: (state) => {
+            state.active = null;
+        },
         setNotes: (state, action) => {
             state.notes = action.payload;
         },
@@ -65,6 +68,7 @@ export const {
     savingNote,
     addNewEmptyNote,
     setActiveNote,
+    setActiveNull,
     setNotes,
     setSaving,
     updateNote,

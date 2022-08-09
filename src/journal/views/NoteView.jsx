@@ -1,7 +1,11 @@
 import { useEffect, useMemo } from "react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Moment from 'moment';
+import moment from 'moment';
+import 'moment/dist/locale/es-do';
+moment.locale('es-do')
+
+
 
 import { useForm } from "../../hooks";
 import { ImageGallery } from "../components";
@@ -27,8 +31,9 @@ export const NoteView = () => {
     const {id, title, body, date, imageUrls, onInputChange, formState} = useForm(activeNote);
 
     const dateString = useMemo(() => {
-        
-        return Moment(date).format('ll');
+        let fecha = moment(date);
+        return fecha.format('LL');
+        // return fecha.format('LL');
         // return Moment(date).format('DD-MM-YYYY');
     }, [date])
 

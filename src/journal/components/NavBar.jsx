@@ -3,12 +3,16 @@ import { AppBar, Button, Grid, IconButton, Link, Toolbar, Typography } from "@mu
 import { useDispatch } from "react-redux"
 import { Link as RouterLink} from "react-router-dom"
 import { startLogout } from "../../store/auth";
+import { setActiveNull } from "../../store/journal";
 
 export const NavBar = ({drawerWidth = 240}) => {
 
     const dispatch =  useDispatch();
     const onClickLogout = () => {
         dispatch(startLogout()); 
+    }
+    const onClickPerson = () => {
+        dispatch(setActiveNull()); 
     }
   
 return (
@@ -35,13 +39,14 @@ return (
                     >
 
                     <Link 
-                            component={RouterLink} 
-                            to="/"
-                            underline="none"
-                            sx={{
-                                color:'white'
-                            }}
-                            >
+                        onClick={onClickPerson}
+                        component={RouterLink} 
+                        to="/"
+                        underline="none"
+                        sx={{
+                            color:'white'
+                        }}
+                    >
                         <Typography 
                             variant="h6" 
                             noWrap 
@@ -88,7 +93,8 @@ return (
                     xs={2} md={2}
                     justifyContent='flex-end'
                     >
-                    <IconButton 
+                    <IconButton
+                        onClick={onClickPerson} 
                         sx={{
                             color:'white'
                         }}
