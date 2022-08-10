@@ -8,7 +8,7 @@ const render = (status) => {
 };
 
 const MapWrapper = ({center = { lat: 18.5142517, lng: -69.8728359}, zoom = 12}) => (
-  <Wrapper apiKey="AIzaSyD6AUPIR0eIiGldIIo0b06uqLxlZDyQh-I" render={render}>
+  <Wrapper apiKey="AIzaSyDCgYZTkQS0M_dba5wkuL_SYEm5exp2J5A" render={render}>
     <MyMapComponent center={center} zoom={zoom}/>
   </Wrapper>
 );

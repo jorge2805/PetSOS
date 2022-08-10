@@ -62,6 +62,7 @@ return (
                         }}
                     >
                         <Link 
+                            onClick={onClickPerson}
                             component={RouterLink} 
                             underline="none"
                             to="/Dashboard"
