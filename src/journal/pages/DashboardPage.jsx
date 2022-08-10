@@ -11,6 +11,8 @@ import { AdminLayout } from "../layout/AdminLayout"
 import { NoteView } from "../views/NoteView"
 import { NothingSelectedView } from "../views/NothingSelectedView"
 
+import MapWrapper from "../components/GoogleMaps/MapWrapper"
+
 export const DashboardPage = () => {
   
   const dispatch = useDispatch();
@@ -27,6 +29,8 @@ export const DashboardPage = () => {
       {/* {(!!active) ? <NoteView/> : <NothingSelectedView/> }       */}
 
       <h1>Dashboard</h1>
+      <MapWrapper />
+      <div style={{ height: "500px" }} id="map"></div>
 
     </AdminLayout>
   )

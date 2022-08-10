@@ -17,6 +17,7 @@ import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
+import MapWrapper from "../components/GoogleMaps/MapWrapper";
 
 
 
@@ -104,8 +105,15 @@ export const NoteView = () => {
                         onClick={ saveNote } 
                         color="primary" 
                         sx={{ padding: 2}}                 >
-                        <SaveOutlined sx={{fontSize: 30, mr: 1}}/>
+                            <SaveOutlined sx={{fontSize: 30, mr: 1}}/>
                         Save
+                    </Button>
+                    <Button
+                        onClick={onDeleteNote}
+                        color="error"
+                    >
+                        <DeleteOutline/>
+                        Delete
                     </Button>
                 </Grid>
             </Grid>
@@ -140,7 +148,7 @@ export const NoteView = () => {
                         fullWidth
                         multiline
                         placeholder="Describe mejor a tu mascota"
-                        minRows={5}
+                        minRows={9}
                         sx={{ border: 'none', mb: 1}}
                         name="body"
                         value={ body  }
@@ -158,16 +166,20 @@ export const NoteView = () => {
                     />
                 </Grid>
             </Grid>
-
+            <MapWrapper zoom={15} />
+            <Grid
+                container
+                item
+                id = 'map'
+                sx = {{
+                    height: 500,
+                    marginTop: 1
+                    
+                }}                          
+            >
+            </Grid>
             <Grid container justifyContent='flex-end'>
-                <Button
-                    onClick={onDeleteNote}
-                    sx={{mt:2}}
-                    color="error"
-                >
-                    <DeleteOutline/>
-                    Delete
-                </Button>
+
             </Grid>
         </Grid>
     )
