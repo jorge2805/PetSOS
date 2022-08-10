@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { loadAllNotes } from "../../../helpers/loadAllNotes";
 
 const MyMapComponent = ({center = { lat: 18.5142517, lng: -69.8728359}, zoom = 12}) => {
-  
   const {notes, active} = useSelector(state => state.journal)
   const user = useSelector(state => state.auth)
 
