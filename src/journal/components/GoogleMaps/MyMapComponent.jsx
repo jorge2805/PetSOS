@@ -4,7 +4,7 @@ import { loadAllNotes } from "../../../helpers/loadAllNotes";
 
 const MyMapComponent = ({center = { lat: 18.5142517, lng: -69.8728359}, zoom = 12}) => {
   const {notes, active} = useSelector(state => state.journal)
-  const user = useSelector(state => state.auth)
+  const {role} = useSelector(state => state.auth)
 
   const [reportes, setReportes] = useState([]);
   
@@ -16,9 +16,9 @@ const MyMapComponent = ({center = { lat: 18.5142517, lng: -69.8728359}, zoom = 1
   
 
 
-  const locations = (!!active) ? [{lat: active.lat, lng: active.long}] : reportes.map(({lat, long: lng})=>{
-    return {lat, lng};
-  });
+  const locations = (!!active) ? [{lat: active.lat, lng: active.long}] : 
+                    (role == 'admin') ? reportes.map(({lat, long: lng})=>{return {lat, lng};}) : 
+                                        notes.map(({lat, long: lng})=>{return {lat, lng};});
 
   const map = new google.maps.Map(document.getElementById("map"), {
     center: (!!active) ? {lat: active.lat, lng: active.long} : center,
