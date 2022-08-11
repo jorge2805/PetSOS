@@ -10,6 +10,7 @@ export const startNewNote = () => {
         
         const { uid } = getState().auth;
 
+        //Status 0: Sin Guardar
         //Status 1: Pendiente de Cambios
         //Status 2: Pendiente de aprobacion
         //Status 3: Rechazada
@@ -24,7 +25,7 @@ export const startNewNote = () => {
             body: '',
             lat: latitude,
             long: longitude,
-            status: 1,
+            status: 0,
             date: new Date().getTime(),
             imageUrls: []
         }
@@ -68,12 +69,13 @@ export const startSavingNote = () => {
 
 
 
-        const newNote = {...note, lat: latitude, long: longitude };
+        const newNote = {...note, lat: latitude, long: longitude, status: 1 };
         delete newNote.id; 
         const noteToUpdateRef = doc( FirebaseFirestoreLite, `${uid}/mascotas/reportes/${note.id}`);
         await setDoc(noteToUpdateRef, newNote, {merge: true});       
 
-        dispatch(updateNote(note));
+        dispatch(updateNote({...newNote, id: note.id}));
+        dispatch(setActiveNote({...newNote, id: note.id}));
     }
 }
 
@@ -104,5 +106,20 @@ export const startDeletingNote = () => {
 
         dispatch( deleteNoteById(note.id) );
 
+    }
+}
+
+export const startChangingStatus = (status) => {
+    return async( dispatch, getState ) => {
+        dispatch(setSaving());
+
+        const {uid} = getState().auth;
+        const {active: note} = getState().journal;
+
+        const noteToUpdateRef = doc( FirebaseFirestoreLite, `${uid}/mascotas/reportes/${note.id}`);
+        await setDoc(noteToUpdateRef, {...note, status: status}, {merge: true});    
+
+        dispatch(updateNote({...note, status: status}));
+        dispatch(setActiveNote({...note, status: status}));
     }
 }

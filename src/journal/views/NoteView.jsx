@@ -9,9 +9,9 @@ moment.locale('es-do')
 
 import { useForm } from "../../hooks";
 import { ImageGallery } from "../components";
-import { setActiveNote, startDeletingNote, startSavingNote, startUploadingFiles } from "../../store/journal";
+import { setActiveNote, startChangingStatus, startDeletingNote, startSavingNote, startUploadingFiles } from "../../store/journal";
 
-import { AddAPhoto, DeleteOutline, SaveOutlined } from "@mui/icons-material";
+import { AddAPhoto, DeleteOutline, ForwardToInboxOutlined, SaveOutlined, TaskAltOutlined, ThumbDownAltOutlined, ThumbUpAltOutlined } from "@mui/icons-material";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 
@@ -29,7 +29,7 @@ export const NoteView = () => {
 
     const {active: activeNote, messageSaved, isSaving} = useSelector(state => state.journal)
   
-    const {id, title, body, date, imageUrls, onInputChange, formState} = useForm(activeNote);
+    const {id, title, body, date, status, imageUrls, onInputChange, formState} = useForm(activeNote);
 
     const dateString = useMemo(() => {
         let fecha = moment(date);
@@ -60,6 +60,18 @@ export const NoteView = () => {
     const onDeleteNote = () => {
         dispatch(startDeletingNote());
     }
+    const EnviarReporteAValidacion = () => {
+        dispatch(startChangingStatus(2));
+    }
+    const aprobarReporte = () => {
+        dispatch(startChangingStatus(4));
+    }
+    const rechazarReporte = () => {
+        dispatch(startChangingStatus(3));
+    }
+    const resolverReporte = () => {
+        dispatch(startChangingStatus(5));
+    }
 
     return (
         <Grid 
@@ -72,18 +84,98 @@ export const NoteView = () => {
             <Grid container item
                 sm={12} md={12}                
             >
+                {/* Seccion de la fecha */}
                 <Grid
                     container 
                     item
-                    sm={6} md={6}                
+                    sm={12} md={3}                
                     justifyContent='flex-start'
+                    alignContent='center'
                 >
-                    <Typography fontSize={39} fontWeight='light'>{dateString}</Typography>
+                    <Typography fontSize={24} fontWeight='light'>{dateString}</Typography>
                 </Grid>
+                {/*
+                Status 0: Sin Guardar
+                Status 1: Pendiente de Cambios
+                Status 2: Pendiente de aprobacion
+                Status 3: Rechazada
+                Status 4: Aprobada
+                Status 5: Resuelto
+                Status 6: Expirada 
+                */}
+                {/* Seccion de cambio de estado */}
+                <Grid
+                    container 
+                    item
+                    sm={6} md={5}                
+                    justifyContent='center'
+                    alignContent='center'
+                >
+                    {(status != 0 && status != 1 && status != 2 && status != 4 ) && <>
+                        <Typography fontSize={24} fontWeight='light'>Estatus: {
+                            status == 3 ?   'Rechazado'   :
+                            status == 5 ?   'Resuleto'    :
+                                            'Expirado'
+                        }</Typography>
+                    </>}
+
+                    {status == 1 && <>
+                        <Button
+                        disabled={isSaving}
+                        onClick={ EnviarReporteAValidacion } 
+                        color="primary"
+                        sx={{ 
+                            padding: 2                                                       
+                        }}                 
+                    >
+                            <ForwardToInboxOutlined sx={{fontSize: 30, mr: 1}}/>
+                        Enviar a Validacion
+                    </Button>
+                    </>}
+
+                    {status == 2 && <>
+                        <Button
+                        disabled={isSaving}
+                        onClick={ aprobarReporte } 
+                        color="primary"
+                        sx={{ 
+                            padding: 2                                                       
+                        }}                 
+                    >
+                            <ThumbUpAltOutlined sx={{fontSize: 30, mr: 1}}/>
+                        Aprobar
+                    </Button>
+                    <Button
+                        disabled={isSaving}
+                        onClick={ rechazarReporte } 
+                        color="error" 
+                        sx={{ padding: 2}}                 >
+                            <ThumbDownAltOutlined sx={{fontSize: 30, mr: 1}}/>
+                        Rechazar
+                    </Button>
+                    </>}
+
+                    
+                    {status == 4 && <>
+                        <Button
+                        disabled={isSaving}
+                        onClick={ resolverReporte } 
+                        color="primary"
+                        sx={{ 
+                            padding: 2                                                       
+                        }}                 
+                    >
+                            <TaskAltOutlined sx={{fontSize: 30, mr: 1}}/>
+                        Resolver
+                    </Button>
+                    </>}
+
+                </Grid>
+                {/* Seccion de Edicion */}
                 <Grid 
                     container
                     item
-                    sm={12} md={6}                
+                    sm={6} md={4}                
                     justifyContent='flex-end'
                 >
                     <input
