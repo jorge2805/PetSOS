@@ -185,6 +185,7 @@ export const NoteView = () => {
                         onChange={onFileInputChange}
                         style={{display: 'none'}}
                     /> 
+                    {(status == 0 || status == 1 || status == 3) && <>
                     <IconButton
                         color="primary"
                         disabled={ isSaving }
@@ -207,6 +208,7 @@ export const NoteView = () => {
                         <DeleteOutline/>
                         Delete
                     </Button>
+                    </>}
                 </Grid>
             </Grid>
 
