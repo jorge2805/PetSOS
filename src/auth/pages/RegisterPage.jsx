@@ -8,10 +8,15 @@ import { AuthLayout } from "../layout/AuthLayout"
 import { useDispatch, useSelector } from 'react-redux'
 
 
+// const DefaultData = {
+//   displayName: 'prueba',
+//   email: 'prueba@gmail.com',
+//   password: '123456'
+// }
 const DefaultData = {
-  displayName: 'prueba',
-  email: 'prueba@gmail.com',
-  password: '123456'
+  displayName: '',
+  email: '',
+  password: ''
 }
 
 const formValidation = {

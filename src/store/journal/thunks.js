@@ -106,6 +106,23 @@ export const startDeletingNote = () => {
 
         dispatch( deleteNoteById(note.id) );
 
+
+        
+        // async function printJSON() {
+        //     const response = await fetch('MOCK_DATA.json');
+        //     const json = await response.json();
+
+        //     var result = [];
+
+        //     for(var i in json)
+        //         result.push(json [i]);
+
+        //     result.forEach((item) => {
+        //         setDoc(doc( collection( FirebaseFirestoreLite, `${uid}/mascotas/reportes/`) ), item);
+        //     });
+        // }
+        // printJSON();
+          
     }
 }
 

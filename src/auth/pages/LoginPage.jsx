@@ -8,9 +8,13 @@ import { startDirectSignIn, startGoogleSignIn } from "../../store/auth"
 import { useDispatch, useSelector } from "react-redux"
 import { useMemo } from "react"
 
+// const initialFormData = {
+//   email: '  prueba@gmail.com',
+//   password: '123456'
+// }
 const initialFormData = {
-  email: '  prueba@gmail.com',
-  password: '123456'
+  email: '',
+  password: ''
 }
 
 export const LoginPage = () => {
