@@ -7,9 +7,9 @@ const render = (status) => {
   return null;
 };
 
-const MapWrapper = ({center = { lat: 18.5142517, lng: -69.8728359}, zoom = 12}) => (
+const MapWrapper = ({center = { lat: 18.5142517, lng: -69.8728359}, zoom = 12, showMarkers = true, showHeatMap = false}) => (
   <Wrapper apiKey="AIzaSyDCgYZTkQS0M_dba5wkuL_SYEm5exp2J5A" render={render}>
-    <MyMapComponent center={center} zoom={zoom}/>
+    <MyMapComponent center={center} zoom={zoom} showMarkers = {showMarkers} showHeatMap = {showHeatMap}/>
   </Wrapper>
 );
 
