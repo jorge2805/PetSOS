@@ -1,24 +1,19 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 
-import { startNewNote } from "../../store/journal"
 import moment from 'moment';
 import 'moment/dist/locale/es-do';
 moment.locale('es-do')
 
-import { AddOutlined } from "@mui/icons-material"
-import { Box, IconButton, List, ListItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
-import { DataGrid } from '@mui/x-data-grid';
+import { Box, Typography } from "@mui/material"
+import { DataGrid, esES } from '@mui/x-data-grid';
 
-import { UserLayout } from "../layout/UserLayout"
+
 import { AdminLayout } from "../layout/AdminLayout"
 
-import { NoteView } from "../views/NoteView"
-import { NothingSelectedView } from "../views/NothingSelectedView"
+
 
 export const ListadoReportesPage = () => {
-  
-  const dispatch = useDispatch();
-  const {isSaving, active } = useSelector( state => state.journal);
+
 
   const {notes: notesData} = useSelector(state => state.journal);
 
@@ -43,10 +38,6 @@ export const ListadoReportesPage = () => {
     }
   })
 
-  const onClickNewNote = () => {
-    dispatch(startNewNote());
-  }
-
   return (
     <AdminLayout>
       
@@ -54,6 +45,7 @@ export const ListadoReportesPage = () => {
 
       <Box style={{ width: '100%' }}>
       <DataGrid
+        localeText={esES.components.MuiDataGrid.defaultProps.localeText}        
         autoHeight
         rows={notes}
         columns={[

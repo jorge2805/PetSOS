@@ -12,7 +12,6 @@ import { ImageGallery } from "../components";
 import { setActiveNote, startChangingStatus, startDeletingNote, startSavingNote, startUploadingFiles } from "../../store/journal";
 
 import { AddAPhoto, DeleteOutline, ForwardToInboxOutlined, SaveOutlined, TaskAltOutlined, ThumbDownAltOutlined, ThumbUpAltOutlined } from "@mui/icons-material";
-import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { Button, Grid, IconButton, MenuItem, Select, TextField, Typography } from "@mui/material";
 
 import Swal from "sweetalert2";

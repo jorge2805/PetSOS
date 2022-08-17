@@ -1,6 +1,6 @@
 import {useSelector} from "react-redux"
 
-import { BookmarkAdd, Person, Pets } from "@mui/icons-material"
+import { Person } from "@mui/icons-material"
 import { Avatar, Grid, Typography } from "@mui/material"
 
 export const ProfileView = () => {
