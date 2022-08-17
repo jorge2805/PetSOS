@@ -4,6 +4,7 @@ export const journalSlice = createSlice({
     name: 'journal',
     initialState: {
         isSaving: false,
+        isSideBarOpen: true,
         messageSaved: '',
         notes: [],
         Provincias: [],
@@ -72,6 +73,9 @@ export const journalSlice = createSlice({
             });
             state.active = null;
         },
+        isSideBarOpenToggle: (state) => {
+            state.isSideBarOpen = !state.isSideBarOpen;
+        },
     },
 })
 
@@ -86,5 +90,6 @@ export const {
     updateNote,
     setPhotosToActiveNote,
     clearNotesLogOut,
-    deleteNoteById 
+    deleteNoteById,
+    isSideBarOpenToggle
 } = journalSlice.actions

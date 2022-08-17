@@ -1,7 +1,13 @@
+import {useSelector} from "react-redux"
+
 import { BookmarkAdd, Person, Pets } from "@mui/icons-material"
-import { Grid, Typography } from "@mui/material"
+import { Avatar, Grid, Typography } from "@mui/material"
 
 export const ProfileView = () => {
+  
+  const {displayName, email, photoUrl} = useSelector(state => state.auth);
+
+
   return (
     <Grid
         container
@@ -12,10 +18,22 @@ export const ProfileView = () => {
         sx={{ minHeight: 'calc(100vh - 110px)', backgroundColor: 'primary.main', borderRadius: 3}}
     >
         <Grid item xs={12}>
-            <Person sx={{ fontSize: 100, color: 'white'}}/>
+            {photoUrl == null ? <Person sx={{ fontSize: 100, color: 'white'}}/> :             
+             <Avatar 
+             src={photoUrl} 
+             sx ={{
+              height: 150,
+              width: 150,
+              mb: 2
+             }}
+             />
+            }
         </Grid>
         <Grid item xs={12}>
-            <Typography color="white" variant="h5">Profile View</Typography>
+            <Typography color="white" variant="h5">{displayName}</Typography>
+        </Grid>
+        <Grid item xs={12}>
+            <Typography color="white" variant="h5">{email}</Typography>
         </Grid>
     </Grid>
   )

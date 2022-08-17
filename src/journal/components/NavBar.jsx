@@ -3,7 +3,7 @@ import { AppBar, Button, Grid, IconButton, Link, Toolbar, Typography } from "@mu
 import { useDispatch } from "react-redux"
 import { Link as RouterLink} from "react-router-dom"
 import { startLogout } from "../../store/auth";
-import { setActiveNull } from "../../store/journal";
+import { isSideBarOpenToggle, setActiveNull } from "../../store/journal";
 
 export const NavBar = ({drawerWidth = 240}) => {
 
@@ -13,6 +13,9 @@ export const NavBar = ({drawerWidth = 240}) => {
     }
     const onClickPerson = () => {
         dispatch(setActiveNull()); 
+    }
+    const onOpenDrawer = () => {
+        dispatch(isSideBarOpenToggle());
     }
   
 return (
@@ -25,6 +28,7 @@ return (
     >
         <Toolbar>
             <IconButton
+                onClick={onOpenDrawer}
                 color="inherit"
                 edge="start"
                 sx={{mr: 2, display: {sm: 'none'}}}
