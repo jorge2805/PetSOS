@@ -24,7 +24,6 @@ class Wrapper extends React.Component {
     const { callback, ...options } = this.props;
 
     const loader = new Loader({...options, libraries: ["visualization"] });
-    console.log(options);
     this.setStatusAndExecuteCallback(Status.LOADING, loader);
 
     loader.load().then(() => {

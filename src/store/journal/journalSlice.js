@@ -6,6 +6,10 @@ export const journalSlice = createSlice({
         isSaving: false,
         messageSaved: '',
         notes: [],
+        Provincias: [],
+        Municipios: [],
+        Raza: [],
+        Sexo: [],
         active: null
         // active: {
         //     id: 'sdfa',
@@ -32,6 +36,13 @@ export const journalSlice = createSlice({
         },
         setNotes: (state, action) => {
             state.notes = action.payload;
+        },
+        setSelects: (state, action) => {
+            console.log(action.payload.Raza);
+            state.Provincias = action.payload.Provincias;
+            state.Municipios = action.payload.Municipios;
+            state.Raza = action.payload.Raza;
+            state.Sexo = action.payload.Sexo;
         },
         setSaving: (state) => {
             state.isSaving = true;
@@ -70,6 +81,7 @@ export const {
     setActiveNote,
     setActiveNull,
     setNotes,
+    setSelects,
     setSaving,
     updateNote,
     setPhotosToActiveNote,

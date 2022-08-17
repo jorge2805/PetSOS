@@ -23,9 +23,6 @@ const MyMapComponent = ({center, zoom, showMarkers, showHeatMap}) => {
 
   // (role == 'admin') ? console.log(['admin', reportes.length]) : console.log(['normal', notes.length]);
 
-  console.log(reportes);
-
-
   const map = new google.maps.Map(document.getElementById("map"), {
     center: (!!active) ? {lat: active.lat, lng: active.long} : center,
     zoom: zoom

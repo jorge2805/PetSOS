@@ -3,7 +3,8 @@ import { FirebaseFirestoreLite } from "../../firebase/config";
 import { fileUpload } from "../../helpers/fileUpload";
 import { getLatLong } from "../../helpers/getLatLong";
 import { loadNotes } from "../../helpers/loadNotes";
-import { addNewEmptyNote, deleteNoteById, savingNote, setActiveNote, setNotes, setPhotosToActiveNote, setSaving, updateNote } from "./journalSlice";
+import { loadSelects } from "../../helpers/loadSelects";
+import { addNewEmptyNote, deleteNoteById, savingNote, setActiveNote, setNotes, setPhotosToActiveNote, setSaving, setSelects, updateNote } from "./journalSlice";
 
 export const startNewNote = () => {
     return async( dispatch, getState ) => {
@@ -54,6 +55,8 @@ export const startLoadingNotes = () => {
 
         const notes = await loadNotes(uid);
         dispatch(setNotes(notes));
+        const selects = await loadSelects();
+        dispatch(setSelects(selects));
     }
 }
 
@@ -114,7 +117,7 @@ export const startDeletingNote = () => {
 
         
         // async function printJSON() {
-        //     const response = await fetch('MOCK_DATA.json');
+        //     const response = await fetch('provincias.json');
         //     const json = await response.json();
 
         //     var result = [];
@@ -123,7 +126,7 @@ export const startDeletingNote = () => {
         //         result.push(json [i]);
 
         //     result.forEach((item) => {
-        //         setDoc(doc( collection( FirebaseFirestoreLite, `${uid}/mascotas/reportes/`) ), item);
+        //         setDoc(doc( collection( FirebaseFirestoreLite, `Datos/Generales/Raza/`) ), item);
         //     });
         // }
         // printJSON();

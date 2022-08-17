@@ -27,7 +27,7 @@ export const NoteView = () => {
     const dispatch =  useDispatch();
     const fileInputRef = useRef();
 
-    const {active: activeNote, messageSaved, isSaving} = useSelector(state => state.journal)
+    const {active: activeNote, Provincias, Municipios, Raza, Sexo, messageSaved, isSaving} = useSelector(state => state.journal)
   
     const {id, title, body, provincia, municipio, sexo, raza, contacto, date, status, imageUrls, onInputChange, formState} = useForm(activeNote);
 
@@ -56,6 +56,10 @@ export const NoteView = () => {
         if( target.files === 0 ) return;
         dispatch( startUploadingFiles(target.files) )
     }
+    let currentProvincia = '';
+    const onProvinciaChange = () => {
+        currentProvincia = provincia
+    }
 
     const onDeleteNote = () => {
         dispatch(startDeletingNote());
@@ -72,13 +76,6 @@ export const NoteView = () => {
     const resolverReporte = () => {
         dispatch(startChangingStatus(5));
     }
-
-    const Provincias = [
-        {
-            value: 1,
-            label: 'Azua'
-        }
-    ]
 
     return (
         <Grid 
@@ -254,8 +251,8 @@ export const NoteView = () => {
                         onChange={onInputChange}
                     >
                         {Provincias.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                            {option.label}
+                            <MenuItem key={option.Provincia} value={option.Provincia}>
+                            {option.Provincia}
                             </MenuItem>
                         ))}                       
                     </TextField>
@@ -270,9 +267,16 @@ export const NoteView = () => {
                         value={ municipio }
                         onChange={onInputChange}
                     >
-                        {Provincias.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                            {option.label}
+                        {Municipios.map((option) => (
+                            (provincia !== '') 
+                            ? 
+                            option.Provincia === provincia &&
+                            <MenuItem key={option.Municipio} value={option.Municipio}>
+                            {option.Municipio}
+                            </MenuItem>
+                            :
+                            <MenuItem key={option.Municipio} value={option.Municipio}>
+                            {option.Municipio}
                             </MenuItem>
                         ))}                       
                     </TextField>
@@ -287,9 +291,9 @@ export const NoteView = () => {
                         value={ raza }
                         onChange={onInputChange}
                     >
-                        {Provincias.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                            {option.label}
+                        {Raza.map((option) => (
+                            <MenuItem key={option.Raza} value={option.Raza}>
+                            {option.Raza}
                             </MenuItem>
                         ))}                       
                     </TextField>
@@ -304,9 +308,9 @@ export const NoteView = () => {
                         value={ sexo }
                         onChange={onInputChange}
                     >
-                        {Provincias.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                            {option.label}
+                        {Sexo.map((option) => (
+                            <MenuItem key={option.Sexo} value={option.Sexo}>
+                            {option.Sexo}
                             </MenuItem>
                         ))}                       
                     </TextField>
