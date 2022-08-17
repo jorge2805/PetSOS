@@ -23,8 +23,13 @@ export const startNewNote = () => {
         const newNote = {
             title: '',
             body: '',
+            provincia: '',
+            municipio: '',
             lat: latitude,
             long: longitude,
+            sexo: '',
+            raza: '',
+            contacto: '',
             status: 0,
             date: new Date().getTime(),
             imageUrls: []

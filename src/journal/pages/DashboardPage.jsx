@@ -52,7 +52,7 @@ export const DashboardPage = () => {
       </FormGroup>
 
       <MapWrapper showHeatMap={showHeatMap} showMarkers = {showMarkers}/>
-      <div style={{ height: "500px" }} id="map"></div>
+      <div style={{ height: "80vh" }} id="map"></div>
 
     </AdminLayout>
   )

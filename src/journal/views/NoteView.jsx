@@ -13,7 +13,7 @@ import { setActiveNote, startChangingStatus, startDeletingNote, startSavingNote,
 
 import { AddAPhoto, DeleteOutline, ForwardToInboxOutlined, SaveOutlined, TaskAltOutlined, ThumbDownAltOutlined, ThumbUpAltOutlined } from "@mui/icons-material";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
-import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
+import { Button, Grid, IconButton, MenuItem, Select, TextField, Typography } from "@mui/material";
 
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
@@ -29,7 +29,7 @@ export const NoteView = () => {
 
     const {active: activeNote, messageSaved, isSaving} = useSelector(state => state.journal)
   
-    const {id, title, body, date, status, imageUrls, onInputChange, formState} = useForm(activeNote);
+    const {id, title, body, provincia, municipio, sexo, raza, contacto, date, status, imageUrls, onInputChange, formState} = useForm(activeNote);
 
     const dateString = useMemo(() => {
         let fecha = moment(date);
@@ -72,6 +72,13 @@ export const NoteView = () => {
     const resolverReporte = () => {
         dispatch(startChangingStatus(5));
     }
+
+    const Provincias = [
+        {
+            value: 1,
+            label: 'Azua'
+        }
+    ]
 
     return (
         <Grid 
@@ -229,13 +236,81 @@ export const NoteView = () => {
                         type="text"
                         variant="filled"
                         fullWidth
-                        placeholder="Insert Tittle"
+                        placeholder="Agregue un Titulo"
                         label="Nombre"
                         sx={{ border: 'none', mb: 1}}
                         name="title"
                         value={ title }
                         onChange={onInputChange}
                     />
+                    <TextField
+                        variant="filled"
+                        placeholder="Indique provincia"
+                        select
+                        label="Provincia"                        
+                        sx={{ border: 'none', mb: 1, width: '50%' }}
+                        name="provincia"
+                        value={ provincia }
+                        onChange={onInputChange}
+                    >
+                        {Provincias.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                            </MenuItem>
+                        ))}                       
+                    </TextField>
+                    <TextField
+                        type="text"
+                        variant="filled"
+                        placeholder="Indique municipio"
+                        label="Municipio"
+                        select
+                        sx={{ border: 'none', mb: 1, width: '50%' }}
+                        name="municipio"
+                        value={ municipio }
+                        onChange={onInputChange}
+                    >
+                        {Provincias.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                            </MenuItem>
+                        ))}                       
+                    </TextField>
+                    <TextField
+                        type="text"
+                        variant="filled"
+                        placeholder="Indique raza"
+                        label="Raza"
+                        sx={{ border: 'none', mb: 1, width: '50%' }}
+                        name="raza"
+                        select
+                        value={ raza }
+                        onChange={onInputChange}
+                    >
+                        {Provincias.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                            </MenuItem>
+                        ))}                       
+                    </TextField>
+                    <TextField
+                        type="text"
+                        variant="filled"
+                        placeholder="Indique sexo"
+                        label="Sexo" 
+                        select                       
+                        sx={{ border: 'none', mb: 1, width: '50%' }}
+                        name="sexo"
+                        value={ sexo }
+                        onChange={onInputChange}
+                    >
+                        {Provincias.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                            </MenuItem>
+                        ))}                       
+                    </TextField>
+
                     <TextField
                         type="text"
                         variant="filled"
