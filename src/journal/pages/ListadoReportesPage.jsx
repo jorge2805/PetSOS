@@ -35,7 +35,10 @@ export const ListadoReportesPage = () => {
         <TableHead>
           <TableRow>
             <TableCell>Nombre</TableCell>
-            <TableCell align="right">Descripción</TableCell>
+            <TableCell align="right">Provincia</TableCell>
+            <TableCell align="right">Municipio</TableCell>
+            <TableCell align="right">Raza</TableCell>
+            <TableCell align="right">Sexo</TableCell>
             <TableCell align="right">Fecha</TableCell>
             <TableCell align="right">Estatus</TableCell>
           </TableRow>
@@ -49,7 +52,10 @@ export const ListadoReportesPage = () => {
               <TableCell component="th" scope="row">
                 {row.title}
               </TableCell>
-              <TableCell align="right">{row.body}</TableCell>
+              <TableCell align="right">{row.provincia}</TableCell>
+              <TableCell align="right">{row.municipio}</TableCell>
+              <TableCell align="right">{row.raza}</TableCell>
+              <TableCell align="right">{row.sexo}</TableCell>
               <TableCell align="right">{moment(row.date).format('LL')}</TableCell>
               <TableCell align="right">{row.status}</TableCell>
             </TableRow>
